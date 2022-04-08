@@ -1,0 +1,76 @@
+<CameraScreen>:
+    GridLayout:
+        cols: 1
+        padding: 5
+        spacing: 10
+        Camera:
+            id: camera
+            resolution: (480, 480)
+            size_hint_y: 0.80
+            play: False
+            opacity: 0
+        Button:
+            id: camera_button
+            text: 'Start Camera' if root.ids.camera.play == False else 'Stop Camera'
+            size_hint_y: 0.1
+            on_press: root.start() if root.ids.camera.play == False else root.stop()
+            background_normal: 'normal.png'
+            background_down: 'down.png'
+
+        Button:
+            id: capture
+            text: 'Capture'
+            size_hint_y: 0.1
+            on_press: root.capture()
+            background_normal: 'down.png'
+            background_down: 'normal.png'
+
+<ImageScreen>:
+    GridLayout:
+        cols: 1
+        padding: 5
+        spacing: 10
+        Image:
+            size_hint_y: 0.65
+            id: img
+            source:
+        Button:
+            text: "Create Link"
+            size_hint_y: 0.10
+            on_press: root.create_link()
+            background_normal: 'normal.png'
+            background_down: 'down.png'
+        Label:
+            id: link
+            text: ""
+            size_hint_y: 0.05
+        GridLayout:
+            cols: 2
+            size_hint_y: 0.10
+            Button:
+                id: copy_link
+                text: "Copy Link"
+                on_press: root.copy_link()
+                background_normal: 'normal.png'
+                background_down: 'down.png'
+            Button:
+                text: "Open Link"
+                on_press: root.open_link()
+                background_normal: 'normal.png'
+                background_down: 'down.png'
+
+
+
+<RootWidget>:
+    canvas.before:
+        Color:
+            rgba: (0.4, 0.25, 0.25, 0.85)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    CameraScreen:
+        id: camera_screen
+        name: 'camera_screen'
+    ImageScreen:
+        id: image_screen
+        name: "image_screen"
